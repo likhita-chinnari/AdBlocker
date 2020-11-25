@@ -60,19 +60,28 @@ public class HomeFragment extends Fragment {
     }
 
     public boolean isConnected(String url, int timeout) {
-        try {
-            URL serverURL = new URL(url);
-            URLConnection urlconn = serverURL.openConnection();
-            urlconn.setConnectTimeout(timeout);
-            urlconn.connect();
-            return true;
-        } catch (IOException e) {
-            Log.e(TAG, e.getLocalizedMessage(), e);
-        } catch (IllegalStateException e) {
-            Log.e(TAG, e.getLocalizedMessage(), e);
-        }
-        return false;
+//        try {
+//            URL serverURL = new URL(url);
+//            URLConnection urlconn = serverURL.openConnection();
+//            urlconn.setConnectTimeout(timeout);
+//            urlconn.connect();
+//            return true;
+//        } catch (IOException e) {
+//            Log.e(TAG, e.getLocalizedMessage(), e);
+//        } catch (IllegalStateException e) {
+//            Log.e(TAG, e.getLocalizedMessage(), e);
+//        }
+//        return false;
+        boolean reachable = true;
 
+        try {
+            reachable = InetAddress.getByName(url).isReachable(10000);
+        } catch (IOException e) {
+            e.printStackTrace();
+            reachable = false;
+        }
+
+        return reachable;
     }
 
 }
