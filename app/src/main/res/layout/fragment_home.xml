@@ -13,7 +13,8 @@
         android:layout_centerInParent="true"
         android:ems="10"
         android:hint="Ex: 192.168.0.2"
-        android:inputType="textEmailAddress" />
+        android:inputType="number|numberDecimal"
+        android:digits="0123456789." />
 
     <TextView
         android:id="@+id/textView2"
@@ -38,5 +39,18 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="36dp"
         android:text="Connect" />
+
+    <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="175dp"
+        android:layout_height="46dp"
+        android:layout_below="@id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:text="Status"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:paddingTop="10dp"
+        android:gravity="center"/>
 
 </RelativeLayout>

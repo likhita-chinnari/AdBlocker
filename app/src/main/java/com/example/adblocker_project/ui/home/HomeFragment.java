@@ -1,9 +1,11 @@
 package com.example.adblocker_project.ui.home;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adblocker_project.R;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -42,14 +52,39 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         Button button = (Button) root.findViewById(R.id.button2);
-        EditText txtname = root.findViewById(R.id.editText);
-        final String name  =  txtname.getText().toString();
+        final EditText txtname = root.findViewById(R.id.editText);
+        final TextView status = (TextView) root.findViewById(R.id.connection_status);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(isConnected(name,10000))
-                    Toast.makeText(getActivity(),"Connected", Toast.LENGTH_SHORT).show();
-                 else
-                    Toast.makeText(getActivity(),"Unable to Connect", Toast.LENGTH_SHORT).show();
+ //                   if(isConnected(name,10000))
+//                    Toast.makeText(getActivity(),"Connected", Toast.LENGTH_SHORT).show();
+//                 else
+//                    Toast.makeText(getActivity(),"Unable to Connect", Toast.LENGTH_SHORT).show();
+                final TextView textView = (TextView) root.findViewById(R.id.connection_status);
+// ...
+
+// Instantiate the RequestQueue.
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                Editable temp =txtname.getText();
+                String url = "https://<temp>/admin/api.php?status";
+// Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Display the first 500 characters of the response string.
+                                textView.setText("Response is: "+"Connection Established");
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        textView.setText("That didn't work!");
+                    }
+                });
+
+// Add the request to the RequestQueue.
+                queue.add(stringRequest);
 
             }
         });
@@ -72,16 +107,21 @@ public class HomeFragment extends Fragment {
 //            Log.e(TAG, e.getLocalizedMessage(), e);
 //        }
 //        return false;
-        boolean reachable = true;
 
-        try {
-            reachable = InetAddress.getByName(url).isReachable(10000);
-        } catch (IOException e) {
-            e.printStackTrace();
-            reachable = false;
-        }
+       // ------------------------------------------------------
+//        boolean reachable = true;
+//
+//        try {
+//            reachable = InetAddress.getByName(url).isReachable(10000);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            reachable = false;
+//        }
+//
+//        return reachable;
+        //----------------------------------------------------------
+        return true;
 
-        return reachable;
     }
 
 }
