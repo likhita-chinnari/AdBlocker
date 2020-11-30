@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(getActivity());
                 Editable temp =txtname.getText();
-                String url = "https://<temp>/admin/api.php?status";
+                String url = "http://" + temp + "/admin/api.php?status";
 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
