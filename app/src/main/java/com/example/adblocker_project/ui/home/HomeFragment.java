@@ -54,21 +54,13 @@ public class HomeFragment extends Fragment {
         Button button = (Button) root.findViewById(R.id.button2);
         final EditText txtname = root.findViewById(R.id.editText);
         final TextView status = (TextView) root.findViewById(R.id.connection_status);
-
+        final TextView textView = (TextView) root.findViewById(R.id.connection_status);
+        final RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String temp =txtname.getText().toString();
+        final String url = "https://jsonplaceholder.typicode.com/todos/1";
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
- //                   if(isConnected(name,10000))
-//                    Toast.makeText(getActivity(),"Connected", Toast.LENGTH_SHORT).show();
-//                 else
-//                    Toast.makeText(getActivity(),"Unable to Connect", Toast.LENGTH_SHORT).show();
-                final TextView textView = (TextView) root.findViewById(R.id.connection_status);
-// ...
 
-// Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(getActivity());
-                Editable temp =txtname.getText();
-                String url = "http://" + temp + "/admin/api.php?status";
-// Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
                             @Override
@@ -82,46 +74,9 @@ public class HomeFragment extends Fragment {
                         textView.setText("That didn't work!");
                     }
                 });
-
-// Add the request to the RequestQueue.
                 queue.add(stringRequest);
-
             }
         });
-
-
-
         return root;
     }
-
-    public boolean isConnected(String url, int timeout) {
-//        try {
-//            URL serverURL = new URL(url);
-//            URLConnection urlconn = serverURL.openConnection();
-//            urlconn.setConnectTimeout(timeout);
-//            urlconn.connect();
-//            return true;
-//        } catch (IOException e) {
-//            Log.e(TAG, e.getLocalizedMessage(), e);
-//        } catch (IllegalStateException e) {
-//            Log.e(TAG, e.getLocalizedMessage(), e);
-//        }
-//        return false;
-
-       // ------------------------------------------------------
-//        boolean reachable = true;
-//
-//        try {
-//            reachable = InetAddress.getByName(url).isReachable(10000);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            reachable = false;
-//        }
-//
-//        return reachable;
-        //----------------------------------------------------------
-        return true;
-
-    }
-
 }
