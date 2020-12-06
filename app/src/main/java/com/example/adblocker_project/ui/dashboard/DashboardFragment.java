@@ -58,21 +58,20 @@ import java.util.Arrays;
 //}
 
 public class DashboardFragment extends Fragment{
-
-    private DashboardViewModel dashboardViewModel;
     View root;
     RecyclerView recyclerView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
+        DashboardViewModel dashboardViewModel = ViewModelProviders.of(this)
+                .get(DashboardViewModel.class);
          root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
-        ArrayList personNames = new ArrayList(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        ArrayList<String> personNames = new ArrayList<>(Arrays.asList("Person 1",
+                "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(DashboardFragment.this, personNames);
+        CustomAdapter customAdapter = new CustomAdapter(personNames);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
          return root;
     }
