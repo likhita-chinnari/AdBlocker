@@ -40,7 +40,7 @@ public class CustomAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        holder.mItemId.setText(personNames.get(position));
+        holder.name.setText(personNames.get(position));
         // implement setOnClickListener event on item view.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class CustomAdapter extends RecyclerView.Adapter {
     }
 
     public  class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView mItemId;// init the item view's
+        public TextView name;// init the item view's
         public MyViewHolder(View itemView) {
             super(itemView);
             // get the reference of item view's
