@@ -50,33 +50,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        Button button = (Button) root.findViewById(R.id.button2);
-        final EditText txtname = root.findViewById(R.id.editText);
-        final TextView status = (TextView) root.findViewById(R.id.connection_status);
-        final TextView textView = (TextView) root.findViewById(R.id.connection_status);
-        final RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String temp =txtname.getText().toString();
-        final String url = "https://jsonplaceholder.typicode.com/todos/1";
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                textView.setText("Response is: "+"Connection Established");
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        textView.setText("That didn't work!");
-                    }
-                });
-                queue.add(stringRequest);
-            }
-        });
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
         return root;
     }
 }

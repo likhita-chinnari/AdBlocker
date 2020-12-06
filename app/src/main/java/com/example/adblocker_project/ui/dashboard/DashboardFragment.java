@@ -2,51 +2,80 @@ package com.example.adblocker_project.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.adblocker_project.MainActivity;
 import com.example.adblocker_project.R;
+import com.example.adblocker_project.ui.notifications.NotificationsViewModel;
 
-public class DashboardFragment extends Fragment {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+//public class DashboardFragment extends Fragment {
+//
+//
+//
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        super.onCreate(savedInstanceState);
+//
+//        setContentView(R.layout.fragment_dashboard);
+//
+//        // Lookup the recyclerview in activity layout
+//        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
+//
+//        // Initialize contacts
+//        contacts = Contact.createContactsList(20);
+//        // Create adapter passing in the sample user data
+//        ContactsAdapter adapter = new ContactsAdapter(contacts);
+//        // Attach the adapter to the recyclerview to populate items
+//        rvContacts.setAdapter(adapter);
+//        // Set layout manager to position the items
+//        rvContacts.setLayoutManager(new LinearLayoutManager(this));
+//        // That's all!
+//
+//        //1. Enter the text and get it
+//        //2. Null or empty check
+//        //3. Add the string to the ContactsAdapter array list
+//        //4. Pass the list to the recycler view
+//
+//
+//    }
+//}
+
+public class DashboardFragment extends Fragment{
+
+    private DashboardViewModel dashboardViewModel;
+    View root;
     RecyclerView recyclerView;
-    MyListAdapter rvAdapter;
-    EditText itemEditText;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel = ViewModelProviders.of(this)
-                .get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
-        itemEditText = (EditText) root.findViewById(R.id.editText);
-
-        //Setting the layout and Adapter for RecyclerView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        rvAdapter = new MyListAdapter();
-        recyclerView.setAdapter(rvAdapter);
-
-//        public void onAddButtonClicked(View view) {
-//
-//            try {
-//                int IntegerFormat = Integer.valueOf(itemEditText.getText().toString());
-//                itemList.add(IntegerFormat);
-//                rvAdapter.notifyItemInserted(itemList.size() - 1);
-//                itemEditText.setText("");
-//            } catch(NumberFormatException e) {
-//                Toast.makeText(getApplicationContext(), "The field is empty",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        }
-
-        return root;
+        dashboardViewModel =
+                ViewModelProviders.of(this).get(DashboardViewModel.class);
+         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
+        ArrayList personNames = new ArrayList(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //  call the constructor of CustomAdapter to send the reference and data to Adapter
+        CustomAdapter customAdapter = new CustomAdapter(DashboardFragment.this, personNames);
+        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
+         return root;
     }
+
+
 }
