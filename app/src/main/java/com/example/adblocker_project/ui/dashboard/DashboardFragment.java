@@ -1,9 +1,7 @@
 package com.example.adblocker_project.ui.dashboard;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,17 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.adblocker_project.MainActivity;
 import com.example.adblocker_project.R;
-import com.example.adblocker_project.ui.notifications.NotificationsViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -60,7 +54,6 @@ import java.util.Arrays;
 
 public class DashboardFragment extends Fragment{
     View root;
-    RecyclerView recyclerView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel = ViewModelProviders.of(this)
@@ -76,8 +69,9 @@ public class DashboardFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
-                String temp = ed.toString();
+                String temp = ed.getText().toString();
                 personNames.add(temp);
+                ed.setText("");
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
