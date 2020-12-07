@@ -71,7 +71,7 @@ public class DashboardFragment extends Fragment{
         final ArrayList<String> personNames = new ArrayList<>(Arrays.asList(" "));
         //"Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"
         EditText ed = (EditText) root.findViewById(R.id.editText2);
-        final String temp = ed.getText().toString();
+        final String temp = ed.toString();
         bt.setOnClickListener(new View.OnClickListener() {
 
             @Override
