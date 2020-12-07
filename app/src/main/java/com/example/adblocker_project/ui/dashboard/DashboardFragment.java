@@ -1,6 +1,7 @@
 package com.example.adblocker_project.ui.dashboard;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -66,8 +67,18 @@ public class DashboardFragment extends Fragment{
                 .get(DashboardViewModel.class);
          root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
-        ArrayList<String> personNames = new ArrayList<>(Arrays.asList("Person 1",
-                "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
+        Button bt = (Button) root.findViewById(R.id.button);
+        final ArrayList<String> personNames = new ArrayList<>(Arrays.asList(" "));
+        //"Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"
+        EditText ed = (EditText) root.findViewById(R.id.editText2);
+        final String temp = ed.getText().toString();
+        bt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                personNames.add(temp);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
