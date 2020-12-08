@@ -14,6 +14,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adblocker_project.R;
 
 import java.util.ArrayList;
@@ -54,33 +60,52 @@ import java.util.Arrays;
 
 public class DashboardFragment extends Fragment{
     View root;
+    public static ArrayList<String> personNames = new ArrayList<>(Arrays.asList(" "));
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel = ViewModelProviders.of(this)
                 .get(DashboardViewModel.class);
-         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
-        Button bt = (Button) root.findViewById(R.id.button);
-        final ArrayList<String> personNames = new ArrayList<>(Arrays.asList(" "));
-        //"Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"
-        final EditText ed = (EditText) root.findViewById(R.id.editText2);
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        // fetching and displaying database info---------------------------------------------------
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        fetchData process = new fetchData();
+         process.execute();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        CustomAdapter customAdapter = new CustomAdapter(personNames);
+        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
+        //---------------------------------------------------------------------------------------
+
+        //adding edittext value to database-----------------------------------------
+        final EditText ed = (EditText) root.findViewById(R.id.editText2);
+        final RequestQueue queue = Volley.newRequestQueue(getActivity());
+        final String url =" ";
+        Button bt = (Button) root.findViewById(R.id.button);
         bt.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String temp = ed.getText().toString();
-                personNames.add(temp);
                 ed.setText("");
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+                queue.add(stringRequest);
             }
         });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(personNames);
-        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
-         return root;
-    }
 
+        return root;
+    }
+    //-----------------------------------------------------------------------------------------------
 
 }
