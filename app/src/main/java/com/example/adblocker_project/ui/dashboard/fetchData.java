@@ -17,14 +17,14 @@ public class fetchData  extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL url = new URL(" ");
+            URL url = new URL("http://192.168.0.212/admin/api.php?list=black&auth=5d9f7e5ddf10edf982ec633865fd5267701851da575772732323f513b6f211bc");
             HttpURLConnection httpURLConnection =(HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             while(line!=null){
                 line = bufferedReader.readLine();
-                data = data+line;
+                data = data + line;
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

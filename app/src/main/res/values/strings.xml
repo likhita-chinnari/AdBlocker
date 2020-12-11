@@ -7,4 +7,6 @@
     <string name="title_BlackList">Blacklist</string>
     <string name="Whitelist_Page">Whitelist Page</string>
     <string name="title_Blacklist_Page">BlackList Page</string>
+    <string name="server_active">Server Active</string>
+    <string name="server_inactive">Server Inactive</string>
 </resources>

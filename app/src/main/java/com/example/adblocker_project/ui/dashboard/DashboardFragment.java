@@ -76,11 +76,10 @@ public class DashboardFragment extends Fragment{
         CustomAdapter customAdapter = new CustomAdapter(personNames);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
         //---------------------------------------------------------------------------------------
-
         //adding edittext value to database-----------------------------------------
         final EditText ed = (EditText) root.findViewById(R.id.editText2);
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
-        final String url =" ";
+        final String url ="http://192.168.0.212/admin/api.php?list=black&add=me.com&auth=5d9f7e5ddf10edf982ec633865fd5267701851da575772732323f513b6f211bc";
         Button bt = (Button) root.findViewById(R.id.button);
         bt.setOnClickListener(new View.OnClickListener() {
 
