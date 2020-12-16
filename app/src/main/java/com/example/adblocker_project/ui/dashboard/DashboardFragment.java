@@ -114,10 +114,6 @@ public class DashboardFragment extends Fragment{
                 queue.add(stringRequest);
             }
         });
-
         return root;
     }
-
-    //--------------------------------------------------------------------------------------------
-
 }
