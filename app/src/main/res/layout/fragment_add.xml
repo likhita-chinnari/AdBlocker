@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="331dp"
+        android:layout_height="65dp"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Ex: 192.168.0.2"
+        android:inputType="number|numberDecimal"
+        android:digits="0123456789." />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="204dp"
+        android:layout_height="36dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/editText"
+        android:layout_alignLeft="@id/editText"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="18dp"
+        android:gravity="start"
+        android:text="Server Address"
+        android:textAlignment="viewStart"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="36dp"
+        android:text="Proceed" />
+
+
+
+
+</RelativeLayout>

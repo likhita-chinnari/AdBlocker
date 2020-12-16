@@ -1,5 +1,6 @@
 package com.example.adblocker_project.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.adblocker_project.Add_IP;
 import com.example.adblocker_project.R;
+import com.example.adblocker_project.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +84,14 @@ public class DashboardFragment extends Fragment{
         final EditText ed = (EditText) root.findViewById(R.id.editText2);
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
         final String url ="http://192.168.0.212/admin/api.php?list=black&add=me.com&auth=5d9f7e5ddf10edf982ec633865fd5267701851da575772732323f513b6f211bc";
+        Button get_btn = (Button) root.findViewById(R.id.button3);
+        get_btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Add_IP.class));
+            }
+        });
         Button bt = (Button) root.findViewById(R.id.button);
         bt.setOnClickListener(new View.OnClickListener() {
 
@@ -105,6 +117,7 @@ public class DashboardFragment extends Fragment{
 
         return root;
     }
-    //-----------------------------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------------
 
 }
